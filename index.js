@@ -5,6 +5,8 @@ const prediction = require('./routes/prediction');
 const teams = require('./routes/teams');
 const users = require('./routes/users');
 const games = require('./routes/games');
+const productionConfig = require('./config/production');
+const devConfig = require('./config/development');
 const app = express();
 
 app.use(bodyParser.json())
@@ -14,6 +16,10 @@ app.use(bodyParser.json())
     .use(teams)
     .use(users)
     .use(games)
+
+process.env.NODE_ENV === 'development'
+    ? devConfig(app)
+    : productionConfig(app)
 
 const PORT = process.env.PORT || 8081;
 

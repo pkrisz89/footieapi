@@ -1,0 +1,33 @@
+{
+    "env": {
+        "browser": true,
+        "es6": true,
+        "jest": true,
+        "node": true
+    },
+    "extends": [
+        "fbjs",
+        "prettier",
+        "prettier/react",
+        "prettier/standard"
+    ],
+    "parser": "babel-eslint",
+    "parserOptions": {
+        "sourceType": "module"
+    },
+    "plugins": [
+        "prettier",
+        "jsx-a11y",
+        "react"
+    ],
+    "settings": {
+        "import/resolver": {
+            "webpack": {
+                "config": "./config/webpack.config.prod.js"
+            }
+        },
+        "react": {
+            "version": "16.2"
+        }
+    }
+}
