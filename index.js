@@ -21,8 +21,8 @@ process.env.NODE_ENV === 'development'
     ? devConfig(app)
     : productionConfig(app)
 
-const PORT = process.env.PORT || 8081;
+process.env.PORT = process.env.PORT || 8081;
 
-app.listen(PORT, () => {
-    console.log(`Listening on port ${PORT}`);
+app.listen(process.env.PORT, () => {
+    console.log(`Listening on port ${process.env.PORT}`);
 });
