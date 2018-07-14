@@ -5,8 +5,8 @@ const prediction = require('./routes/prediction');
 const teams = require('./routes/teams');
 const users = require('./routes/users');
 const games = require('./routes/games');
-const productionConfig = require('./config/production');
-const devConfig = require('./config/development');
+const dashboard = require('./routes/dashboard');
+const ReactEngine = require('express-react-engine');
 const app = express();
 
 app.use(bodyParser.json())
@@ -16,10 +16,10 @@ app.use(bodyParser.json())
     .use(teams)
     .use(users)
     .use(games)
+    .use(dashboard);
 
-process.env.NODE_ENV === 'development'
-    ? devConfig(app)
-    : productionConfig(app)
+app.set('views', __dirname + '/components');
+app.engine('jsx', ReactEngine());
 
 process.env.PORT = process.env.PORT || 8081;
 
