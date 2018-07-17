@@ -41,7 +41,7 @@ router.get('/games/:date', (req, res) => {
 });
 
 router.get('/games', (req, res) => {
-    models.GAME.findAll().then((game) => {
+    models.GAME.findAll({ include: ['homeTeam', 'awayTeam']}).then((game) => {
         res.json({ game })
     })
 });
