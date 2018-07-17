@@ -5,9 +5,17 @@ const prediction = require('./routes/prediction');
 const teams = require('./routes/teams');
 const users = require('./routes/users');
 const games = require('./routes/games');
-const productionConfig = require('./config/production');
-const devConfig = require('./config/development');
+
+const webpack = require('webpack');
+const webpackDevMiddleware = require('webpack-dev-middleware');
+const config = require('./webpack.config.js');
+const compiler = webpack(config);
+
 const app = express();
+
+app.use(webpackDevMiddleware(compiler, {
+    publicPath: config.output.publicPath
+}));
 
 app.use(bodyParser.json())
     .use(morgan('dev'))
@@ -17,9 +25,6 @@ app.use(bodyParser.json())
     .use(users)
     .use(games)
 
-process.env.NODE_ENV === 'development'
-    ? devConfig(app)
-    : productionConfig(app)
 
 process.env.PORT = process.env.PORT || 8081;
 
