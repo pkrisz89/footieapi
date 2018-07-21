@@ -24,7 +24,7 @@ router.put('/user/:userId/calculate-score', (req, res) => {
         .then(predictions => {
             const score = predictions.reduce((acc, curr) => {
                 if (curr.prediction === curr.game.result) {
-                    return acc = acc + 1;
+                    return acc += 1;
                 }
                 return acc;
             }, 0)

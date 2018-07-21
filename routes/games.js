@@ -23,6 +23,12 @@ router.put('/game/:gameId/result', (req, res) => {
         }).then(updated => res.json({ updated }))
 });
 
+router.delete('/game/:gameId',(req, res) => {
+    const { gameId } = req.params;
+    return models.GAME.destroy({ where: { gameId } })
+        .then(updated => res.json({ updated }))
+});
+
 router.get('/game/:gameId', (req, res) => {
     const { gameId } = req.params;
 
