@@ -13,18 +13,18 @@ const compiler = webpack(config);
 
 const app = express();
 
-app.use(webpackDevMiddleware(compiler, {
-    publicPath: config.output.publicPath
-}));
+if (process.env.NODE_ENV === 'development') {
+    app.use(webpackDevMiddleware(compiler, {publicPath: config.output.publicPath}));
+}
 
-app.use(bodyParser.json())
+app
+    .use(bodyParser.json())
     .use(morgan('dev'))
-    .use(bodyParser.urlencoded({ extended: true }))
+    .use(bodyParser.urlencoded({extended: true}))
     .use(prediction)
     .use(teams)
     .use(users)
     .use(games)
-
 
 process.env.PORT = process.env.PORT || 8081;
 

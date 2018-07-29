@@ -10,7 +10,6 @@ const db = {};
 
 const sequelize = new Sequelize(config.url);
 
-
 fs
     .readdirSync(__dirname)
     .filter(file => {
@@ -21,13 +20,14 @@ fs
         db[model.name] = model;
     });
 
-Object.keys(db).forEach(modelName => {
-    if (db[modelName].associate) {
-        db[modelName].associate(db);
-    }
-});
+Object
+    .keys(db)
+    .forEach(modelName => {
+        if (db[modelName].associate) {
+            db[modelName].associate(db);
+        }
+    });
 // sequelize.sync();
-
 
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
