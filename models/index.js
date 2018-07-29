@@ -1,5 +1,3 @@
-'use strict';
-
 const fs = require('fs');
 const path = require('path');
 const Sequelize = require('sequelize');
@@ -27,7 +25,7 @@ Object
             db[modelName].associate(db);
         }
     });
-// sequelize.sync();
+sequelize.sync();
 
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
